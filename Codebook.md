@@ -48,7 +48,8 @@ The following files are available for the train and test data. Their description
 
 ### The descriptive variable name transformation:
 
-```> Filtered_features <- colnames(OrganizedData)
+```R
+> Filtered_features <- colnames(OrganizedData)
 > Filtered_features <- gsub("\\(\\)", "", Filtered_features)
 > Filtered_features <- gsub("^t", "time", Filtered_features)
 > Filtered_features <- gsub("^f", "frequency", Filtered_features)
@@ -58,7 +59,8 @@ The following files are available for the train and test data. Their description
 > Filtered_features <- gsub("Mag", "-magnitude", Filtered_features)
 > Filtered_features <- gsub("---", "--", Filtered_features)
 > Filtered_features <- tolower(Filtered_features)
-> colnames(OrganizedData) <- Filtered_features ```
+> colnames(OrganizedData) <- Filtered_features 
+```
 
 ### The ```run_analysis.R``` script can:
 
