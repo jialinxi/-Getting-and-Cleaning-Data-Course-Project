@@ -46,6 +46,19 @@ The following files are available for the train and test data. Their description
 
 ## Transformation details
 
+### The descriptive variable name transformation:
+```> Filtered_features <- colnames(OrganizedData)
+> Filtered_features <- gsub("\\(\\)", "", Filtered_features)
+> Filtered_features <- gsub("^t", "time", Filtered_features)
+> Filtered_features <- gsub("^f", "frequency", Filtered_features)
+> Filtered_features <- gsub("BodyBody", "Body", Filtered_features)
+> Filtered_features <- gsub("Gyro", "-gyroscope", Filtered_features)
+> Filtered_features <- gsub("Acc", "-acceleration", Filtered_features)
+> Filtered_features <- gsub("Mag", "-magnitude", Filtered_features)
+> Filtered_features <- gsub("---", "--", Filtered_features)
+> Filtered_features <- tolower(Filtered_features)
+> colnames(OrganizedData) <- Filtered_features```
+
 ### The ```run_analysis.R``` script can:
 
 1. Merges the training and the test sets to create one data set.
