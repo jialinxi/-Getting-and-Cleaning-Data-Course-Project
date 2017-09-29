@@ -51,11 +51,24 @@ library(plyr)
 OrganizedData <- arrange(OrganizedData, Subject)
 #Merge train set and Test set, then sort based on ascending order of subject
 
+Filtered_features <- colnames(OrganizedData)
+Filtered_features <- gsub("\\(\\)", "", Filtered_features)
+Filtered_features <- gsub("^t", "time", Filtered_features)
+Filtered_features <- gsub("^f", "frequency", Filtered_features)
+Filtered_features <- gsub("BodyBody", "Body", Filtered_features)
+Filtered_features <- gsub("Gyro", "-gyroscope", Filtered_features)
+Filtered_features <- gsub("Acc", "-acceleration", Filtered_features)
+Filtered_features <- gsub("Mag", "-magnitude", Filtered_features)
+Filtered_features <- gsub("---", "--", Filtered_features)
+Filtered_features <- tolower(Filtered_features)
+colnames(OrganizedData) <- Filtered_features
+#Give each column of our data set a descriptive name
+
 library(reshape2)
 Data_labels <- colnames(OrganizedData)[3:81]
-Data_melt <- melt(OrganizedData, id = c("Subject", "Labelfullname"), measure.vars = Data_labels)
-tidy_data <- dcast(Data_melt, Subject + Labelfullname ~ variable, mean)
+Data_melt <- melt(OrganizedData, id = c("subject", "labelfullname"), measure.vars = Data_labels)
+tidy_data <- dcast(Data_melt, subject + labelfullname ~ variable, mean)
 #From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject
 
-write.table(tidy_data, file = "./tidy_data.txt")
+write.table(tidy_data, file = "./tidy_data.txt", sep = "\t", row.name = FALSE)
 #Write tidy_data as txt file
